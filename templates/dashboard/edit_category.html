@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class='row'>
+    {% comment %} left side bar {% endcomment %}
+    {% comment %} Load the side bar here {% endcomment %}
+    {% include "dashboard/sidebar.html" %}
+   
+  {% comment %} RIGHT SIDE BAR {% endcomment %}
+  <div class='col-md-8'>
+    <h4>Edit Categories</h4>
+    <form action="{% url 'edit_category' category.id %}" method='POST'>
+    {% csrf_token %}
+    {{form}}
+    <button type='submit' class='btn btn-warning'>Submit</button>
+      </form>
+
+    
+  </div>
+
+</div>
+{% endblock  %}

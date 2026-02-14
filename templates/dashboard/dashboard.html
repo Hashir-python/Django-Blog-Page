@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content  %}
+<div class='row'>
+    {% comment %} left side bar {% endcomment %}
+    {% comment %} Load the side bar here {% endcomment %}
+    {% include "dashboard/sidebar.html" %}
+
+    
+  {% comment %} RIGHT SIDE BAR {% endcomment %}
+  
+  <div class='col-md-8'>
+    <span>Logged in as <b>{{user}}</b></span>
+    <div class='row'>
+        <div class='col'>
+            <div class='card border-default mb-3'>
+                <div class='card-header text-center text uppercase font-weight-bold'>All Categories</div>
+                <div class='card-body text-dark'>
+                <h5 class='card-title text-center'>{{Categories_count}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class='col'>
+            <div class='card border-default mb-3'>
+                <div class='card-header text-center text uppercase font-weight-bold'>All Posts</div>
+                <div class='card-body text-dark'>
+                <h5 class='card-title text-center'>{{Blogs_count}}</h5>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock  %}
