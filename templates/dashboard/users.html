@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+first_name
+{% block content %}
+
+<div class='row'>
+    {% comment %} left side bar {% endcomment %}
+    {% comment %} Load the side bar here {% endcomment %}
+    {% include "dashboard/sidebar.html" %}
+   
+  {% comment %} RIGHT SIDE BAR {% endcomment %}
+  <div class='col-md-8'>
+    {% if perms.auth.view_user %}
+    <h4>User Data</h4>
+    <a href="{% url 'add_user' %}" class='btn btn-dark text-light float-right mb-2'>Add New-User</a>
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th >#</th>
+      <th >Name</th>
+      <th >Username</th>
+      <th >Email</th>
+      <th >Active</th>
+      <th >Staff</th>
+      <th>Super-User</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in user %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{user.first_name}} {{user.last_name}}</th>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td>{% if user.is_active %}<i class='fa fa-check text-success'>{% else %}<i class='fa fa-times text-danger'>{% endif %}</td>
+      <td>{% if user.is_staff %}<i class='fa fa-check text-success'>{% else %}<i class='fa fa-times text-danger'>{% endif %}</td>
+      <td>{% if user.is_superuser %}<i class='fa fa-check text-success'>{% else %}<i class='fa fa-times text-danger'>{% endif %}</td>
+      <td>
+        <a href="{% url 'edit_user' user.id %}"><i class='fa fa-edit text-success'></i></a>
+        &nbsp;
+        <a href="{%url 'delete_user' user.id %}"><i class='fa fa-trash text-danger'></i></a>
+      </td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h3>You dont have permission to Acess this Page</h3>
+{% endif %}
+  </div>
+
+</div>
+{% endblock  %}
