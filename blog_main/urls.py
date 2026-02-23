@@ -24,14 +24,22 @@ from blogs import views as BlogsViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home,name='home'),
-    path('category/',include('blogs.urls')),
-    path('blogs/<slug:slug>/',BlogsViews.blogs,name='blogs'),
-    #search endpoints
-    path('blogs/search/',BlogsViews.search,name='search'),
-    path('register/',views.register,name='register'),
-    path('login/',views.login,name='login'),
-    path('logout/',views.logout,name='logout'),
-    #dashboards
-    path('dashboard/',include('dashboard.urls'),name='login')
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    path('', views.home, name='home'),
+    
+    # 🔍 SEARCH - 
+    path('blogs/search/', BlogsViews.search, name='search'),
+    
+    # 📝 BLOG DETAIL - BAAD MEIN (Less specific)
+    path('blogs/<slug:slug>/', BlogsViews.blogs, name='blogs'),
+    
+    # 📂 CATEGORY
+    path('category/', include('blogs.urls')),
+    
+    # 🔐 AUTH
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    
+    # 📊 DASHBOARD
+    path('dashboard/', include('dashboard.urls'), name='login')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
